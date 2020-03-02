@@ -8,26 +8,14 @@
     tools:context=".communication.MainActivity">
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/show_mylocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello TWIPEE"
+        android:text="My Location is?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onBtnClick"
-        android:text="여행시작" />
-
-    <Button
-        android:id="@+id/go_beacon_method"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="go_BeaconMethod" />
 
 </LinearLayout>

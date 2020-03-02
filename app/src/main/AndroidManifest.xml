@@ -28,6 +28,7 @@
             </intent-filter>
         </receiver>
         <activity android:name=".communication.Beacon_Service"/>
+        <activity android:name=".communication.Beacon_Method"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

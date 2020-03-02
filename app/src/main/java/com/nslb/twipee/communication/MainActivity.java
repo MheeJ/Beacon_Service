@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.go_beacon_service:
                 Intent intent = new Intent(this,Beacon_Service.class);
                 startActivity(intent);
+                break;
         }
     }
 

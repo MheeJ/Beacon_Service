@@ -1,6 +1,7 @@
 package com.nslb.twipee.communication;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,16 +33,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Beacon_Service extends AppCompatActivity {
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
+public class Beacon_Service extends AppCompatActivity implements View.OnClickListener {
     private MinewBeaconManager mMinewBeaconManager;
     private boolean bClick = false;
-    private Button BeaconBtn;
+    private Button BeaconBtn,Go_BeaconMethod;
     private TextView BeaconText;
     private final int PERMISSION_REQUEST_COARSE_LOCATION = 100;
     private String[] beacon_name = new String[10];
     private String[] location_name = new String[10];
     private String b_name;
     String Toast_Show = "no";
+    private String myLocation=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class Beacon_Service extends AppCompatActivity {
                                     if (b_name.equals(beacon_name[j])) {
                                        // ID = "yes";
                                         BeaconText.setText(b_name);
+                                        //내 위치 정보
+                                        myLocation = location_name[j];
                                         if(Toast_Show.equals("no")){
                                             setToast(location_name[j] + "에 오신것을 환영합니다.");
                                             Toast_Show="yes";
@@ -102,7 +108,11 @@ public class Beacon_Service extends AppCompatActivity {
 
     public void initObject(){
         BeaconBtn = (Button)findViewById(R.id.start);
+        BeaconBtn.setOnClickListener(this);
         BeaconText = (TextView)findViewById(R.id.textview);
+        Go_BeaconMethod = (Button)findViewById(R.id.go_beacon_method);
+        Go_BeaconMethod.setOnClickListener(this);
+
         beacon_name[0] = "mini";
         beacon_name[1] = "Gangwon";
         beacon_name[2] = "Chungbuk";
@@ -142,7 +152,41 @@ public class Beacon_Service extends AppCompatActivity {
         }
     }
 
-    public void onBtnClick(View view)  throws Exception
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.start:
+                if (!bClick)
+                {
+                    BeaconBtn.setText("여행끝");
+                    try {
+                        mMinewBeaconManager.startScan();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    bClick = true;
+                }
+                else
+                {
+                    BeaconBtn.setText("여행시작");
+                    BeaconText.setText("Hello TWIPEE");
+                    Toast_Show="no";
+                    myLocation = null;
+                    if (mMinewBeaconManager != null) {
+                        mMinewBeaconManager.stopScan();
+                    }
+                    bClick = false;
+                }
+                break;
+
+            case R.id.go_beacon_method:
+                Intent intent = new Intent(this,Beacon_Method.class);
+                intent.putExtra("myLocation",myLocation);
+                startActivity(intent);
+                break;
+        }
+    }
+   /* public void onBtnClick(View view)  throws Exception
     {
         // if (view.getId() == R.id.start)
         switch (view.getId())
@@ -168,8 +212,11 @@ public class Beacon_Service extends AppCompatActivity {
                         }
                     bClick = false;
                 }
+                break;
+
+
         }
-    }
+    }*/
 
 
     private void initManager() {
