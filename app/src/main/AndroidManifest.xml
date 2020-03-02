@@ -27,7 +27,7 @@
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED"/>
             </intent-filter>
         </receiver>
-
+        <activity android:name=".communication.Beacon_Service"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
