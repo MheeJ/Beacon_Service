@@ -118,7 +118,7 @@ public class Beacon_Service extends AppCompatActivity implements View.OnClickLis
         beacon_name[2] = "Chungbuk";
         beacon_name[3] = "Chungnam";
         beacon_name[4] = "Seoul29250";
-        beacon_name[5] = "Jeonnam";
+        beacon_name[5] = "Jeonnam29247";
         beacon_name[6] = "Gyeongnam";
         beacon_name[7] = "Gyeongbuk";
         beacon_name[8] = "Ulleung";
@@ -171,6 +171,7 @@ public class Beacon_Service extends AppCompatActivity implements View.OnClickLis
                     BeaconBtn.setText("여행시작");
                     BeaconText.setText("Hello TWIPEE");
                     Toast_Show="no";
+                    setToast("여행을 마칩니다.");
                     myLocation = null;
                     if (mMinewBeaconManager != null) {
                         mMinewBeaconManager.stopScan();
