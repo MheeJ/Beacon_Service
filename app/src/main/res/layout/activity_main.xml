@@ -8,12 +8,32 @@
     tools:context=".communication.MainActivity">
 
 
+
+    <TextView
+        android:id="@+id/beacon_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BeaconService" />
+
     <Button
-         android:id="@+id/go_beacon_service"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="goto_BeaconService"
-         android:onClick="onBtnClick"/>
+        android:id="@+id/go_beacon_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="goto_BeaconService" />
+
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="여행시작" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textOn="여행끝"
+        android:textOff="여행시작"
+        android:text="ToggleButton" />
 
 
 </LinearLayout>

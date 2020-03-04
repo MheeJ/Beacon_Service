@@ -135,6 +135,7 @@ public class Beacon_Service extends AppCompatActivity implements View.OnClickLis
         location_name[8] = "울릉도";
         location_name[9] = "제주도";
     }
+/*
 
 
     @Override
@@ -151,6 +152,7 @@ public class Beacon_Service extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
+*/
 
     @Override
     public void onClick(View v) {

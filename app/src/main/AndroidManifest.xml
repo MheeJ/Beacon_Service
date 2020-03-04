@@ -29,6 +29,8 @@
         </receiver>
         <activity android:name=".communication.Beacon_Service"/>
         <activity android:name=".communication.Beacon_Method"/>
+        <activity android:name=".communication.BeaconService"/>
+        <service android:name=".communication.BeaconService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
