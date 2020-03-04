@@ -1,28 +1,13 @@
 package com.nslb.twipee.communication;
 
-import android.Manifest;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.minew.beacon.BeaconValueIndex;
 import com.minew.beacon.BluetoothState;
 import com.minew.beacon.MinewBeacon;
 import com.minew.beacon.MinewBeaconManager;
 import com.minew.beacon.MinewBeaconManagerListener;
-import com.nslb.twipee.R;
-
 import java.util.List;
 
 public class BeaconService extends Service {
@@ -37,8 +22,6 @@ public class BeaconService extends Service {
     final static String MY_ACTION = "MY_ACTION";
     private String Previous_Beacon = "previous";
     private String Latest_Beacon = "last";
-
-
 
     public BeaconService(){}
 
@@ -57,8 +40,6 @@ public class BeaconService extends Service {
         initManager();
     }
 
-
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         processCommand(intent);
@@ -69,14 +50,12 @@ public class BeaconService extends Service {
                 e.printStackTrace();
             }
             beacon_start();
-
         }
         else if(Beacon_Main.equals("TurnOff")){
             if (mMinewBeaconManager != null) {
                 mMinewBeaconManager.stopScan();
             }
         }
-
         return super.onStartCommand(intent,flags,startId);
     }
 
@@ -91,11 +70,9 @@ public class BeaconService extends Service {
             @Override
             public void onAppearBeacons(List<MinewBeacon> list) {
             }
-
             @Override
             public void onDisappearBeacons(List<MinewBeacon> list) {
             }
-
             @Override
             public void onRangeBeacons(final List<MinewBeacon> list) {
                 new Thread(new Runnable() {
@@ -118,11 +95,10 @@ public class BeaconService extends Service {
                                             Previous_Beacon = myLocation;
                                             Intent intent = new Intent();
                                             intent.setAction(MY_ACTION);
-                                            intent.putExtra("DATAPASSED",myLocation);
+                                            intent.putExtra("ServiceData",myLocation);
                                             sendBroadcast(intent);
                                             Toast_Show="yes";
                                         }
-
                                     }
                                 }
                             }
@@ -136,19 +112,18 @@ public class BeaconService extends Service {
         });
     }
 
-
     public void initObject(){
 
         beacon_name[0] = "Seoul29250";
-        beacon_name[1] = "Gangwon";
-        beacon_name[2] = "Chungbuk";
-        beacon_name[3] = "Chungnam";
+        beacon_name[1] = "Gangwon29260";
+        beacon_name[2] = "Chungbuk29252";
+        beacon_name[3] = "Chungnam29251";
         beacon_name[4] = "Jeonbuk00000";
         beacon_name[5] = "Jeonnam29247";
-        beacon_name[6] = "Gyeongnam";
-        beacon_name[7] = "Gyeongbuk";
-        beacon_name[8] = "Ulleung";
-        beacon_name[9] = "Jeju0000";
+        beacon_name[6] = "Gyeongnam29244";
+        beacon_name[7] = "Gyeongbuk29249";
+        beacon_name[8] = "NamsanTower29245";
+        beacon_name[9] = "Jeju29259";
 
         location_name[0] = "서울";
         location_name[1] = "강원도";
@@ -158,19 +133,12 @@ public class BeaconService extends Service {
         location_name[5] = "전라남도";
         location_name[6] = "경상남도";
         location_name[7] = "경상북도";
-        location_name[8] = "울릉도";
+        location_name[8] = "남산타워";
         location_name[9] = "제주도";
     }
 
-
-
     private void initManager() {
         mMinewBeaconManager = MinewBeaconManager.getInstance(this);
-    }
-
-    public void SendToMain(){
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra(myLocation,"myLocation");
     }
 
     private void checkBluetooth() {
