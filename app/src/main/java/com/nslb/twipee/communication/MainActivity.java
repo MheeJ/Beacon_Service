@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onReceive(Context arg0, Intent arg1) {
             // TODO Auto-generated method stub
             DataFromService = arg1.getStringExtra("ServiceData");
+            //UI에 표시하는 부분 여기에 입력하면 됨 _ 현재 접속된 비콘 이름 출력
             set_UI();
         }
     }

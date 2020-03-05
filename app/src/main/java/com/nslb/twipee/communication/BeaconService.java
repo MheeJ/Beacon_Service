@@ -18,7 +18,7 @@ public class BeaconService extends Service {
     private String b_name;
     String Toast_Show = "no";
     private String myLocation = null;
-    public String Beacon_Main;
+    private String beacon_condition;
     final static String MY_ACTION = "MY_ACTION";
     private String Previous_Beacon = "previous";
     private String Latest_Beacon = "last";
@@ -43,7 +43,7 @@ public class BeaconService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         processCommand(intent);
-        if(Beacon_Main.equals("TurnON")){
+        if(beacon_condition.equals("TurnON")){
             try {
                 mMinewBeaconManager.startScan();
             } catch (Exception e) {
@@ -51,7 +51,7 @@ public class BeaconService extends Service {
             }
             beacon_start();
         }
-        else if(Beacon_Main.equals("TurnOff")){
+        else if(beacon_condition.equals("TurnOff")){
             if (mMinewBeaconManager != null) {
                 mMinewBeaconManager.stopScan();
             }
@@ -60,8 +60,7 @@ public class BeaconService extends Service {
     }
 
     private void processCommand(Intent intent){
-        String hello = intent.getStringExtra("Beacon_Condition");
-        Beacon_Main = hello;
+        beacon_condition = intent.getStringExtra("Beacon_Condition");
         intent.setAction(MY_ACTION);
     }
 
